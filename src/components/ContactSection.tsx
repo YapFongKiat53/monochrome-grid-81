@@ -86,7 +86,9 @@ const ContactSection = () => {
     });
 
     try {
-      const payload = { ...result.data, submittedAt: submissionTime, website: honeypot };
+      // Honeypot key renamed from "website" — browsers autofilled that name for
+      // real visitors, causing the Apps Script to silently drop their leads.
+      const payload = { ...result.data, submittedAt: submissionTime, hp_ref: honeypot };
       const response = await fetch(
         "https://script.google.com/macros/s/AKfycbwcKMzmjXypCo3--xJHv-mrBAIXNQ7IfwCr1JF8PgI7t9FzEEzJEnqVonCnG7m9AObd/exec",
         {
@@ -97,13 +99,20 @@ const ContactSection = () => {
       );
 
       if (response.ok) {
+        // Read the endpoint's JSON verdict — {ok, spam?} — so the Ads
+        // conversion only fires when the lead was actually saved as real.
+        let data: { ok?: boolean; spam?: boolean } | null = null;
+        try { data = await response.json(); } catch { /* non-JSON: treat as saved */ }
+
         toast({ title: "Message sent", description: `Successfully at ${submissionTime}` });
         // 成功后清空表单
         setForm({ name: "", phone: "", email: "", projectType: "", propertyLocation: "", serviceCategory: "" });
         setErrors({});
-        
-        // Google Ads conversion tracking
-        if (typeof window !== "undefined" && (window as any).gtag) {
+
+        // Google Ads conversion — only for genuinely saved (non-spam) leads,
+        // so Ads conversion counts always match the lead sheet.
+        const savedAsRealLead = data === null || (data.ok === true && data.spam !== true);
+        if (savedAsRealLead && typeof window !== "undefined" && (window as any).gtag) {
           (window as any).gtag("event", "conversion", {
             send_to: "AW-11342839562/aySGCNSJiqAcEIr-16Aq",
           });
@@ -188,13 +197,13 @@ const ContactSection = () => {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Honeypot */}
+                {/* Honeypot — name must never be autofillable ("website" was; it dropped real leads) */}
                 <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
                   <label>
-                    Website
+                    Leave this field empty
                     <input
                       type="text"
-                      name="website"
+                      name="hp_ref"
                       tabIndex={-1}
                       autoComplete="off"
                       value={honeypot}

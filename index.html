@@ -2,16 +2,25 @@
 <html lang="en">
 
 <head>
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-TLJVTK8X');</script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HIDI Lau Architect — Architecture · Interior · Design</title>
+  <title>Architect Firm Malaysia | Design and Build | Hidi Lau Architect</title>
   <meta name="description"
     content="HIDI Lau Architect is a multi-disciplinary architectural design studio in Johor Bahru, Malaysia. Architecture, interior design and passionate craftsmanship since 1989.">
   <meta name="author" content="HIDI Lau Architect" />
 
   <!-- 1. 性能优化：预加载首屏 LCP 图片 -->
   <link rel="preload" as="image" href="/images/hero/1.webp" fetchpriority="high">
-  
+
   <!-- 2. 网站图标 -->
   <link rel="icon" type="image/png" href="/assets/logo-CP_OYl3M.png">
 
@@ -52,20 +61,25 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5PBQHDG583"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     // 1. Google Analytics 4 追踪 (流量分析)
     gtag('config', 'G-5PBQHDG583');
-    
+
     // 2. Google Ads 追踪 (核心！用来接收你 WhatsApp 和表单的转化数据)
     gtag('config', 'AW-11342839562'); 
   </script>
 </head>
 
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLJVTK8X" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
+
 </body>
 
 </html>

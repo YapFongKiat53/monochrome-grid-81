@@ -16,7 +16,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <SEO
-        title="Interior Architect Malaysia | Design and Build Company | GET A QUOTE NOW"
+        title="Architect Firm Malaysia | Design and Build | Hidi Lau Architect"
         description="Multi-disciplinary architectural design studio in Johor Bahru, Malaysia. Architecture, interior design and passionate craftsmanship since 1989."
         path="/"
         schema={getHomeSchema()}

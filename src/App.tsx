@@ -47,7 +47,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Suspense fallback={null}>
-            <WhatsAppChatWidget phoneE164="60167442330" />
+            <WhatsAppChatWidget />
           </Suspense>
         </BrowserRouter>
       </TooltipProvider>
